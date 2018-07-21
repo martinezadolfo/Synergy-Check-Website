@@ -15,10 +15,20 @@
       <p>Stay safe</p> 
     </header>
     <section id="substanceOne" class="substanceOne text-style">
+      <p id="substanceOneName">Drug Name</p>
+      <p id="substanceOneInfo">Drug Information</p>
+      <input type="text" oninput=updateObjectOne(this.value)>
+      <button onclick=updateSubstanceOne()>Click me</button>
     </section>
     <section id="substanceTwo" class="substanceTwo text-style">
+      <p id="substanceTwoName">Drug Name</p>
+      <p id="substanceTwoInfo">Drug Information </p>
+      <input type="text" oninput="updateObjectTwo(this.value)">
+      <button onclick="updateSubstanceTwo()">Click me</button>
     </section>
     <footer id='synergyBox' class="footer text-style">
+      <p id="synergyCheck">This is teh check</p>
+      <button onclick="updateSynergyCheck()">Synergy Check</button>
     </footer>
   </div>
   <script src="script.js"></script>

@@ -1,47 +1,50 @@
-const substanceObject = {};
+const substanceObject = {
+  substanceOne: 'lsd',
+  substanceTwo: 'cannabis'
+};
+
+function fetchSubstanceInfo(substance, substanceName, substanceInfo) {
+  fetch(`http://tripbot.tripsit.me/api/tripsit/getDrug?name=${substance}`)
+    .then(resp => resp.json())
+    .then((result) => {
+      document.getElementById(substanceName).innerHTML = result.data[0].name;
+      document.getElementById(substanceInfo).innerHTML = result.data[0].properties.summary;
+    })
+}
 
 function fetchSynergyCheck(substances) {
   let substanceOne = substances.substanceOne;
   let substanceTwo = substances.substanceTwo;
   fetch(`http://tripbot.tripsit.me/api/tripsit/getDrug?name=${substanceOne}`)
-    .then(res => res.json())
+    .then(resp => resp.json())
     .then((result) => {
-      let synergyCheck = document.getElementById('synergyBox');
-      let endInfo = document.createElement('p');
-      let endInfoText = document.createTextNode(' information provided by TripSit http://substances.tripsit.me/ ')
-      synergyCheck.innerHTML = result.data[0].combos[substanceTwo].status;
-      endInfo.appendChild(endInfoText);
-      synergyCheck.appendChild(endInfo);
+      document.getElementById('synergyCheck').innerHTML = result.data[0].combos[substanceTwo].status;
     })
-
-
-
 }
 
-function fetchDrugInfo(substancee, id, el) {
-  fetch(`http://tripbot.tripsit.me/api/tripsit/getDrug?name=${substancee}`)
-    .then(res => res.json())
-    .then((result) => {
-      let substance = document.getElementById(id);
-      let substanceName = document.createElement(el);
-      let drugNameText = document.createTextNode(result.data[0].name);
-      let drugNameInfo = document.createElement(el);
-      let drugInformation = document.createTextNode(result.data[0].properties.summary);
-      substanceName.appendChild(drugNameText);
-      drugNameInfo.appendChild(drugInformation);
-      substance.appendChild(substanceName);
-      substance.appendChild(drugNameInfo);
-    })
-
-  substanceObject[id] = substancee;
+function updateObjectOne(event) {
+  substanceObject['substanceOne'] = event;
 }
 
-fetchDrugInfo('cannabis', 'substanceOne', 'p');
-fetchDrugInfo('caffeine', 'substanceTwo', 'p');
-fetchSynergyCheck(substanceObject);
+function updateSubstanceOne() {
+  fetchSubstanceInfo(substanceObject.substanceOne, 'substanceOneName', 'substanceOneInfo', 'substanceOne');
+}
 
-console.log(substanceObject);
+function updateObjectTwo(event) {
+  substanceObject['substanceTwo'] = event;
+}
 
+function updateSubstanceTwo() {
+  fetchSubstanceInfo(substanceObject.substanceTwo, 'substanceTwoName', 'substanceTwoInfo', 'substanceTwo');
+}
+
+function updateSynergyCheck() {
+  fetchSynergyCheck(substanceObject);
+}
+
+updateSubstanceOne();
+updateSubstanceTwo();
+updateSynergyCheck(substanceObject);
 
 
 

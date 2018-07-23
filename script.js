@@ -1,6 +1,6 @@
 const substanceObject = {
-  substanceOne: 'lsd',
-  substanceTwo: 'cannabis'
+  substanceOne: 'cannabis',
+  substanceTwo: 'caffeine'
 };
 
 function fetchSubstanceInfo(substance, substanceName, substanceInfo) {

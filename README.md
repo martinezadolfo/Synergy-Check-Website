@@ -1,5 +1,5 @@
 # Synergy Check
-Check how two substances will interact when combined
+Check how two substances will interact when combined.
 
 This project was intended for education purposes and to reduce the risk of harmful abuse.
 
